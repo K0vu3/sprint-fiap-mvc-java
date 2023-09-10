@@ -2,12 +2,10 @@ package br.com.sprint.app.model;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Cliente {
+
     private Long id;
     private String cnpj;
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date date;
 
     public Cliente(Long id, String cnpj, Date date) {
@@ -17,7 +15,6 @@ public class Cliente {
     }
 
     public Cliente() {
-
     }
 
     public void setId(Long id) {
@@ -43,5 +40,4 @@ public class Cliente {
     public Date getDate() {
         return date;
     }
-
 }

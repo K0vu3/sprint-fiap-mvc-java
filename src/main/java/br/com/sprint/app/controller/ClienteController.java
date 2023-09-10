@@ -3,7 +3,6 @@ package br.com.sprint.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,43 +10,40 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sprint.app.model.Cliente;
 
-@Controller
 public class ClienteController {
 
     List<Cliente> clientes = new ArrayList<>();
 
-    @GetMapping("/create")
+    @GetMapping("/create-cliente")
     public ModelAndView home() {
-        ModelAndView mv = new ModelAndView("create");
-        mv.addObject("produto", new Cliente());
+        ModelAndView mv = new ModelAndView("create-cliente");
+        mv.addObject("cliente", new Cliente());
         return mv;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create-cliente")
     public String create(Cliente cliente) {
-
         if (cliente.getId() != null) {
-            Cliente produtoFind = clientes.stream().filter(clienteItem -> cliente.getId().equals(clienteItem.getId()))
+            Cliente clienteFind = clientes.stream().filter(clienteItem -> cliente.getId().equals(clienteItem.getId()))
                     .findFirst().get();
-            clientes.set(clientes.indexOf(produtoFind), cliente);
+            clientes.set(clientes.indexOf(clienteFind), cliente);
         } else {
             Long id = clientes.size() + 1L;
             clientes.add(new Cliente(id, cliente.getCnpj(), cliente.getDate()));
         }
-
-        return "redirect:/list";
+        return "redirect:/list-cliente";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/list-cliente")
     public ModelAndView list() {
-        ModelAndView mv = new ModelAndView("list");
+        ModelAndView mv = new ModelAndView("list-cliente");
         mv.addObject("clientes", clientes);
         return mv;
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/edit-cliente/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
-        ModelAndView mv = new ModelAndView("create");
+        ModelAndView mv = new ModelAndView("create-cliente");
 
         Cliente clienteFind = clientes.stream().filter(cliente -> id.equals(cliente.getId())).findFirst().get();
         mv.addObject("cliente", clienteFind);
@@ -55,7 +51,7 @@ public class ClienteController {
         return mv;
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/delete-cliente/{id}")
     public String delete(@PathVariable("id") Long id) {
 
         for (Cliente cliente : clientes) {
@@ -66,7 +62,7 @@ public class ClienteController {
             }
         }
 
-        return "redirect:/list";
+        return "redirect:/list-cliente";
     }
 
 }
