@@ -1,43 +1,41 @@
 package br.com.sprint.app.model;
 
-import java.util.Date;
-
 public class Cliente {
-
     private Long id;
-    private String cnpj;
-    private Date date;
+    private String nome;
+    private String email;
 
-    public Cliente(Long id, String cnpj, Date date) {
+    public Cliente(Long id, String nome, String email) {
         this.id = id;
-        this.cnpj = cnpj;
-        this.date = date;
+        this.nome = nome;
+        this.email = email;
     }
 
     public Cliente() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Date getDate() {
-        return date;
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

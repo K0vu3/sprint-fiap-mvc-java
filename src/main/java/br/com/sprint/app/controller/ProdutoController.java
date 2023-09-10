@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sprint.app.model.Produto;
 
 @Controller
+@RequestMapping("/produtos")
 public class ProdutoController {
 
     List<Produto> produtos = new ArrayList<>();
@@ -35,7 +37,7 @@ public class ProdutoController {
             produtos.add(new Produto(id, produto.getNome(), produto.getDate()));
         }
 
-        return "redirect:/list";
+        return "redirect:/produtos/list";
     }
 
     @GetMapping("/list")
@@ -66,7 +68,7 @@ public class ProdutoController {
             }
         }
 
-        return "redirect:/list";
+        return "redirect:/produtos/list";
     }
 
 }

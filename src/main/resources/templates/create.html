@@ -14,16 +14,22 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/create">Cadastro</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/list">Listagem</a>
-          </li>
+            <a class="nav-link" href="/produtos/create">Cadastro de Produtos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/produtos/list">Listagem de Produtos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/clientes/create">Cadastro de Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/clientes/list">Listagem de Clientes</a>
+        </li>
         </ul>
       </div>
     </div>
   </nav>
-    <form method="POST" action="/create" th:object="${produto}">
+    <form method="POST" action="/produtos/create" th:object="${produto}">
         <input type="hidden" name="id" th:value="${produto.id}">
         <div class="mb-3">
           <label class="form-label">Nome do produto</label>
