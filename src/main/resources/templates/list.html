@@ -46,11 +46,12 @@
                 <td th:text="${produto.nome}"></td>
                 <td th:text="${{produto.date}}"></td>
                 <td>
-                    <a th:href="@{'/edit/'+${produto.id}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'/produtos/edit/' + ${produto.id}}" class="btn btn-warning">Editar</a>
                 </td>
                 <td>
-                    <a th:href="@{'/delete/' + ${produto.id}}" class="btn btn-danger">Excluir</a>
+                    <a th:href="@{'/produtos/delete/' + ${produto.id}}" class="btn btn-danger">Excluir</a>
                 </td>
+                
             </tr>
         </tbody>
     </table>
