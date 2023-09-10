@@ -55,4 +55,18 @@ public class ProdutoController {
         return mv;
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+
+        for (Produto produto : produtos) {
+            
+            if (produto.getId().equals(id)) {
+                produtos.remove(produto);
+                break;
+            }
+        }
+
+        return "redirect:/list";
+    }
+
 }
