@@ -10,5 +10,22 @@
 </head>
 <body>
     <span>Lista de tarefas</span>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nome do produto</th>
+                <th scope="col">Data de cadastro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="produto : ${produtos}">
+                <td th:text="${produto.id}"></td>
+                <td th:text="${produto.nome}"></td>
+                <td th:text="${{produto.date}}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
 </body>
 </html>
