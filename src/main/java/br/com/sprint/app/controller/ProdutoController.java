@@ -17,14 +17,23 @@ public class ProdutoController {
     List<Produto> produtos = new ArrayList<>();
 
     @GetMapping("/create")
-    public String home() {
-        return "create";
+    public ModelAndView home() {
+        ModelAndView mv = new ModelAndView("create");
+        mv.addObject("produto", new Produto());
+        return mv;
     }
 
     @PostMapping("/create")
     public String create(Produto produto) {
-        Long id = produtos.size() + 1L;
-        produtos.add(new Produto(id, produto.getNome(), produto.getDate()));
+
+        if (produto.getId() != null) {
+            Produto produtoFind = produtos.stream().filter(produtoItem -> produto.getId().equals(produtoItem.getId()))
+                    .findFirst().get();
+            produtos.set(produtos.indexOf(produtoFind), produto);
+        } else {
+            Long id = produtos.size() + 1L;
+            produtos.add(new Produto(id, produto.getNome(), produto.getDate()));
+        }
 
         return "redirect:/list";
     }
