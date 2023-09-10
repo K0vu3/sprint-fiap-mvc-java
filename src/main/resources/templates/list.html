@@ -16,6 +16,7 @@
                 <th scope="col">id</th>
                 <th scope="col">Nome do produto</th>
                 <th scope="col">Data de cadastro</th>
+                <th scope="col">Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +24,14 @@
                 <td th:text="${produto.id}"></td>
                 <td th:text="${produto.nome}"></td>
                 <td th:text="${{produto.date}}"></td>
+                <td>
+                    <a href="">Editar</a>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <a href="/create">Cadastrar</a>
     
 </body>
 </html>
