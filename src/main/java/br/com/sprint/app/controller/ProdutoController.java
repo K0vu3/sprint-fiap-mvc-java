@@ -19,9 +19,15 @@ public class ProdutoController {
         return "create";
     }
 
+    @GetMapping("/list")
+    public String list() {
+        return "list";
+    }
+
     @PostMapping("/create")
-    public void create(Produto produto) {
+    public String create(Produto produto) {
         Long id = produtos.size() + 1L;
         produtos.add(new Produto(id, produto.getNome(), produto.getDate()));
+        return "list";
     }
 }
