@@ -25,7 +25,7 @@
                 <td th:text="${produto.nome}"></td>
                 <td th:text="${{produto.date}}"></td>
                 <td>
-                    <a href="">Editar</a>
+                    <a th:href="@{'/edit/'+${produto.id}}">Editar</a>
                 </td>
             </tr>
         </tbody>
