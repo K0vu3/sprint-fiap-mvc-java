@@ -49,8 +49,8 @@ public class ClienteController {
     public ModelAndView edit(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("create");
 
-        Cliente clienteFind = clientes.stream().filter(produto -> id.equals(produto.getId())).findFirst().get();
-        mv.addObject("produto", clienteFind);
+        Cliente clienteFind = clientes.stream().filter(cliente -> id.equals(cliente.getId())).findFirst().get();
+        mv.addObject("cliente", clienteFind);
 
         return mv;
     }
