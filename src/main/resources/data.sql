@@ -10,6 +10,7 @@ insert into clientex (id, email, nome) values (8, 'fpowter7@dailymail.co.uk', 'F
 insert into clientex (id, email, nome) values (9, 'amccroary8@omniture.com', 'Aurora');
 insert into clientex (id, email, nome) values (10, 'amatovic9@youtu.be', 'Aili');
 
+
 --Inserir registros na tabela produtox
 insert into produtox (id, data, nome, cliente_id) values (1, '26/07/2008', 'Sheilakathryn', 1);
 insert into produtox (id, data, nome, cliente_id) values (2, '10/11/2021', 'Sandie', 2);
