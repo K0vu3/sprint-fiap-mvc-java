@@ -36,11 +36,8 @@ public class ProdutoController {
 
 	public Long determinarClienteId() {
 		Long clienteIdPadrao = clienteRepo.obterClienteComIdMaisAlto();
-
-		// se não houver clientes no banco de dados, você pode definir um valor padrão
-		// aqui
 		if (clienteIdPadrao == null) {
-			clienteIdPadrao = 1L; // valor padrão
+			clienteIdPadrao = 1L;
 		}
 
 		return clienteIdPadrao;
@@ -48,16 +45,11 @@ public class ProdutoController {
 
 	@PostMapping("/create")
 	public String create(Produto produto) {
-		Long clienteId = determinarClienteId(); // Implemente sua lógica aqui
-
-		// Encontre o cliente pelo ID
+		Long clienteId = determinarClienteId(); 
 		Cliente cliente = clienteRepo.findById(clienteId)
 				.orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado: " + clienteId));
-
-		// Associe o cliente ao produto
-		produto.setCliente(cliente);
-
-		// Salve o produto no banco de dados
+		
+		produto.setCliente(cliente);	
 		produtoRepo.save(produto);
 
 		return "redirect:/produtos/list";
