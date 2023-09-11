@@ -1,14 +1,19 @@
 package br.com.sprint.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+@Entity
+@Table(name = "produto") // Nome da tabela no banco de dados
 public class Produto {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date date;
 
     public Produto(Long id, String nome, Date date) {

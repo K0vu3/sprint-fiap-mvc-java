@@ -1,6 +1,16 @@
 package br.com.sprint.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cliente")
 public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
@@ -37,5 +47,4 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }
