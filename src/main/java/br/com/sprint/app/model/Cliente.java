@@ -22,9 +22,6 @@ public class Cliente {
     
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produto> produtos = new ArrayList<>();
-
-    
-
     public Cliente(Long id, String nome, String email, List<Produto> produtos) {
 		super();
 		this.id = id;
