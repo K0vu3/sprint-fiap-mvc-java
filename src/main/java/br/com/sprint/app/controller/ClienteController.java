@@ -1,5 +1,6 @@
 package br.com.sprint.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,18 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sprint.app.model.Cliente;
-
-import java.util.ArrayList;
-import java.util.List;
+import br.com.sprint.app.repositorie.ClienteRepositorie;
 
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private List<Cliente> clientes = new ArrayList<>();
+    private final ClienteRepositorie clienteRepo;
+
+    @Autowired
+    public ClienteController(ClienteRepositorie clienteRepo) {
+        this.clienteRepo = clienteRepo;
+    }
 
     @GetMapping("/list")
     public String listClientes(Model model) {
+        Iterable<Cliente> clientes = clienteRepo.findAll();
         model.addAttribute("clientes", clientes);
         return "listCliente";
     }
@@ -33,18 +38,14 @@ public class ClienteController {
     @PostMapping("/create")
     public String createCliente(Cliente cliente) {
         if (cliente.getId() != null) {
-            for (int i = 0; i < clientes.size(); i++) {
-                Cliente clienteExistente = clientes.get(i);
-                if (clienteExistente.getId().equals(cliente.getId())) {
-                    clienteExistente.setNome(cliente.getNome());
-                    clienteExistente.setEmail(cliente.getEmail());
-                    break;
-                }
+            Cliente clienteExistente = clienteRepo.findById(cliente.getId()).orElse(null);
+            if (clienteExistente != null) {
+                clienteExistente.setNome(cliente.getNome());
+                clienteExistente.setEmail(cliente.getEmail());
+                clienteRepo.save(clienteExistente);
             }
         } else {
-            Long id = clientes.isEmpty() ? 1L : clientes.get(clientes.size() - 1).getId() + 1;
-            cliente.setId(id);
-            clientes.add(cliente);
+            clienteRepo.save(cliente);
         }
 
         return "redirect:/clientes/list";
@@ -53,24 +54,15 @@ public class ClienteController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("createCliente");
-
-        Cliente clienteFind = clientes.stream().filter(cliente -> id.equals(cliente.getId())).findFirst().get();
-        mv.addObject("cliente", clienteFind);
-
+        Cliente cliente = clienteRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado: " + id));
+        mv.addObject("cliente", cliente);
         return mv;
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
-
-        for (Cliente cliente : clientes) {
-
-            if (cliente.getId().equals(id)) {
-                clientes.remove(cliente);
-                break;
-            }
-        }
-
+        clienteRepo.deleteById(id);
         return "redirect:/clientes/list";
     }
 }
