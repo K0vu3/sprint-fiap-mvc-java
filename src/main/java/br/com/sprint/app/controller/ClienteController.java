@@ -32,11 +32,20 @@ public class ClienteController {
 
     @PostMapping("/create")
     public String createCliente(Cliente cliente) {
-
-        Long id = clientes.isEmpty() ? 1L : clientes.get(clientes.size() - 1).getId() + 1;
-        cliente.setId(id);
-
-        clientes.add(cliente);
+        if (cliente.getId() != null) {
+            for (int i = 0; i < clientes.size(); i++) {
+                Cliente clienteExistente = clientes.get(i);
+                if (clienteExistente.getId().equals(cliente.getId())) {
+                    clienteExistente.setNome(cliente.getNome());
+                    clienteExistente.setEmail(cliente.getEmail());
+                    break;
+                }
+            }
+        } else {
+            Long id = clientes.isEmpty() ? 1L : clientes.get(clientes.size() - 1).getId() + 1;
+            cliente.setId(id);
+            clientes.add(cliente);
+        }
 
         return "redirect:/clientes/list";
     }
