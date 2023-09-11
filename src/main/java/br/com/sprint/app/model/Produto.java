@@ -18,11 +18,8 @@ public class Produto {
 	private String data;
 
 	@ManyToOne
-    @JoinColumn(name = "cliente_id") // Nome da coluna de chave estrangeira na tabela Produto
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
-	
-
 	public Produto(Long id, String nome, String data, Cliente cliente) {
 		super();
 		this.id = id;

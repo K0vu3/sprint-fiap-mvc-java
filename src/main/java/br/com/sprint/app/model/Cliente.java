@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "clientex")
 public class Cliente {
@@ -24,9 +22,6 @@ public class Cliente {
     
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produto> produtos = new ArrayList<>();
-
-    
-
     public Cliente(Long id, String nome, String email, List<Produto> produtos) {
 		super();
 		this.id = id;
