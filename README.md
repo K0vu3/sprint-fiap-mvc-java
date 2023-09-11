@@ -118,3 +118,20 @@ Após a implantação, você pode acessar sua aplicação usando o URL fornecido
 ```shell
 az webapp show --name <nome-do-seu-appservice>.
 ```
+
+
+az group create --name app-java --location eastus &&
+
+az appservice plan create --resource-group app-java --name app-java-plan --sku FREE &&
+
+az webapp create --resource-group app-java --name app-java-webapp --plan app-java-plan --runtime "java:17:Java SE:17" &&
+
+az webapp config appsettings set --resource-group app-java --name app-java-webapp --settings DATABASE_URL=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL &&
+
+az webapp deployment source config --name app-java-webapp --resource-group app-java --manual-integration --repo-url https://github.com/Dagostini01/sprint-fiap-mvc-java.git --branch master && 
+
+az webapp deployment source sync --name app-java-webapp --resource-group app-java &&
+
+mvn com.microsoft.azure:azure-webapp-maven-plugin:2.9.0:config && 
+
+mvn package azure-webapp:deploy -DskipTests
