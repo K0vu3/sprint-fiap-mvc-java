@@ -47,10 +47,10 @@
                 <td th:text="${cliente.nome}"></td>
                 <td th:text="${cliente.email}"></td>
                 <td>
-                    <a th:href="@{'/edit/'+${cliente.id}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'/clientes/edit/' + ${cliente.id}}" class="btn btn-warning">Editar</a>
                 </td>
                 <td>
-                    <a th:href="@{'/delete/'+${cliente.id}}" class="btn btn-danger">Excluir</a>
+                    <a th:href="@{'/clientes/delete/' + ${cliente.id}}" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
         </tbody>        

@@ -51,7 +51,6 @@ public class ClienteController {
         return mv;
     }
 
-    
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
 
@@ -63,6 +62,6 @@ public class ClienteController {
             }
         }
 
-        return "redirect:/list";
+        return "redirect:/clientes/list";
     }
 }
